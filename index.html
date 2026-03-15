@@ -12,117 +12,50 @@
             color: white; font-family: 'Arial', sans-serif; text-align: center; margin: 0; min-height: 100vh; overflow-x: hidden; line-height: 1.6; 
             position: relative;
         }
-
-        .star {
-            position: fixed;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: twinkle var(--duration) infinite ease-in-out;
-            z-index: 0;
-            pointer-events: none;
-        }
-        @keyframes twinkle {
-            0%, 100% { transform: scale(1); opacity: 0.2; }
-            50% { transform: scale(1.4); opacity: 0.8; }
-        }
-
-        .falling-heart {
-            position: fixed;
-            top: -10%;
-            color: #ff69b4;
-            font-size: 20px;
-            user-select: none;
-            pointer-events: none;
-            z-index: 15;
-            animation: fall linear forwards;
-        }
-        @keyframes fall {
-            to {
-                transform: translateY(110vh) rotate(360deg);
-            }
-        }
-
-        .static-hearts-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;
-        }
-        .static-heart {
-            position: absolute; color: rgba(255, 105, 180, 0.6); font-size: 20px;
-            filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.3));
-        }
-
+        .star { position: fixed; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--duration) infinite ease-in-out; z-index: 0; pointer-events: none; }
+        @keyframes twinkle { 0%, 100% { transform: scale(1); opacity: 0.2; } 50% { transform: scale(1.4); opacity: 0.8; } }
+        .falling-heart { position: fixed; top: -10%; color: #ff69b4; font-size: 20px; user-select: none; pointer-events: none; z-index: 15; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        .static-hearts-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .static-heart { position: absolute; color: rgba(255, 105, 180, 0.6); font-size: 20px; filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.3)); }
         #loader { position: fixed; width: 100%; height: 100%; background: #2d0b1e; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: 0.3s; }
         .heart-loader { font-size: 60px; animation: pulse 1s infinite; color: #ff69b4; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
-
         .screen { display: none; width: 100%; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         .active { display: flex; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
         .card { background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(10px); border-radius: 25px; padding: 25px; width: 95%; max-width: 450px; border: 1px solid rgba(255,105,180,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.3); margin-bottom: 20px; z-index: 5; position: relative; }
-        
-        .extra-card {
-            background: rgba(255, 105, 180, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            width: 95%;
-            max-width: 450px;
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            margin-bottom: 15px;
-            text-align: right;
-            z-index: 5;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .extra-card b { color: #ff69b4; font-size: 16px; display: block; margin-bottom: 5px; }
-
         .profile-img-container { margin-bottom: 15px; display: flex; justify-content: center; }
         .lock-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #ff69b4; object-fit: cover; box-shadow: 0 0 20px rgba(255, 105, 180, 0.4); background: #444; }
-
         .photo-gallery { display: flex; flex-direction: column; gap: 25px; margin-top: 20px; }
         .photo-item { width: 100%; background: rgba(0,0,0,0.3); border-radius: 15px; padding: 10px; border: 1px solid rgba(255, 105, 180, 0.2); }
         .photo-item img { width: 100%; height: auto; border-radius: 10px; display: block; background: #333; min-height: 200px; }
         .caption { margin-top: 10px; font-size: 14px; color: #ffb6c1; font-weight: bold; }
-
         .timer-title { color: #ffb6c1; font-weight: bold; margin-bottom: 10px; display: block; font-size: 14px;}
         .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
         .timer-box { background: rgba(255, 105, 180, 0.12); padding: 8px 2px; border-radius: 12px; border: 1px solid rgba(255,105,180,0.3); }
         .timer-box span { display: block; font-size: 16px; color: #fff; font-weight: bold; }
         .timer-label { font-size: 10px; color: #ffb6c1; }
-
-        .date-badge {
-            background: linear-gradient(45deg, rgba(255, 105, 180, 0.2), rgba(255, 20, 147, 0.3));
-            border: 1px dashed #ff69b4; padding: 10px; border-radius: 15px; margin-top: 15px;
-            font-weight: bold; color: #fff; display: inline-block; font-size: 15px;
-        }
-
-        .glass-box {
-            background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(15px); border-radius: 25px; padding: 25px;
-            width: 95%; max-width: 450px; border: 1px solid rgba(255, 105, 180, 0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            text-align: right; margin-bottom: 20px; z-index: 5; position: relative;
-        }
+        .date-badge { background: linear-gradient(45deg, rgba(255, 105, 180, 0.2), rgba(255, 20, 147, 0.3)); border: 1px dashed #ff69b4; padding: 10px; border-radius: 15px; margin-top: 15px; font-weight: bold; color: #fff; display: inline-block; font-size: 15px; }
+        .glass-box { background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(15px); border-radius: 25px; padding: 25px; width: 95%; max-width: 450px; border: 1px solid rgba(255, 105, 180, 0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.3); text-align: right; margin-bottom: 20px; z-index: 5; position: relative; }
         .main-title { color: #ff69b4; font-weight: bold; font-size: 1.2rem; }
         .love-message { font-size: 15px; color: #fff; }
-        .معاكسة { color: #ffb6c1; font-weight: bold; }
-
         input { padding: 15px; border-radius: 12px; border: 1px solid #ff69b4; background: rgba(255,255,255,0.1); color: white; text-align: center; width: 80%; font-size: 18px; margin-bottom: 15px; outline: none; }
         button { background: #ff69b4; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; z-index: 10; position: relative; }
-
         .footer-rights { margin-top: 20px; padding-bottom: 30px; font-size: 14px; color: #ffb6c1; }
-        .footer-rights b { color: #fff; border-bottom: 1px solid #ff69b4; }
-
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
         .modal-content { background: #2d0b1e; border-radius: 25px; padding: 30px; width: 85%; max-width: 400px; border: 2px solid #ff69b4; }
-
-        #youtube-player { display: none; }
+        .extra-card { background: rgba(255, 105, 180, 0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; width: 95%; max-width: 450px; border: 1px solid rgba(255, 105, 180, 0.3); margin-bottom: 15px; text-align: right; z-index: 5; position: relative; }
     </style>
 </head>
 <body>
 
+    <audio id="mySong" loop>
+        <source src="https://files.catbox.moe/6v0n4e.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="starsContainer"></div>
     <div id="staticHearts" class="static-hearts-container"></div>
-    <div id="youtube-player"></div>
 
     <div id="loader">
         <div class="heart-loader">❤️</div>
@@ -201,8 +134,7 @@
                 <span class="main-title">الرسالة دي ليكي يا دودي..</span>
             </div>
             <p class="love-message">
-               "الكتكوتة كبرت سنة واحلوت وبقت مزة رسمي كل سنة وانتي طيبة يا دودي ويا رب سنينك الجاية كلها ضحك وفرحة شبه ضحكتك القمر وعقبال مليون سنة وانتي منورة الدنيا بحلاوتك ورقتك يا احلى دودي. وطبعاً طبعاً أنا يوم ما عرفتك مكنتش خاااالص متوقع إننا هنكون قريبين كدا.. بس الأيام أثبتت لي إنك أجدع وأغلى صاحبة دخلت حياتي، وعشرتنا دي بجد من أجمل الحاجات اللي حصلتلي. ومن 2021 ولحد اللحظة دي، كنتِ دايماً الصاحبة اللي بتجمل الأيام بوجودها.. دمتِ أجدع وأحن صاحبة يا دودي وكل سنة وإحنا أصحاب ومكملين سوا. 🥹❤️"   
-                <span class="معاكسة">وبطلي تحلوي اكتر من كدا عشان اديكي شايفه الوضع مش مستحمل 😂❤️❤️</span>
+               "الكتكوتة كبرت سنة واحلوت وبقت مزة رسمي.. كل سنة وانتي طيبة يا دودي.. ويوم ما عرفتك مكنتش متوقع إننا هنكون قريبين كدا.. دمتِ أجدع وأحن صاحبة يا دودي وكل سنة وإحنا أصحاب ومكملين سوا. 🥹❤️"   
             </p>
         </div>
 
@@ -218,13 +150,30 @@
     <div id="finalModal" class="modal">
         <div class="modal-content">
             <h2 style="color: #ff69b4;">دودي😍</h2>
-            <p>أنا فعلاً حظي حلو إنك في حياتي، وبتمنالك كل حاجة حلوة في الدنيا وان شاء الله توصلي للي بتتمنيه عشان انتي تستاهلي دا يقمر ❤️</p>
+            <p>أنا فعلاً حظي حلو إنك في حياتي ❤️</p>
             <button onclick="closeModal()" style="width: 100%;">خلصنا يا بطلي😂❤️</button>
         </div>
     </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        function checkPass() {
+            const pass = document.getElementById('passInput').value;
+            if(pass === '1532004') {
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+                
+                // تشغيل الأغنية فوراً هنا
+                const song = document.getElementById('mySong');
+                song.play().catch(e => console.log("الصوت محتاج تفاعل"));
+                
+                setInterval(createFallingHeart, 300);
+                startCounters();
+            } else {
+                alert('الباسورد غلط! ركزي يا دودي 😉');
+            }
+        }
+
+        // باقي الدوال (النجوم، العدادات، القلوب)
         function generateStars() {
             const container = document.getElementById('starsContainer');
             for (let i = 0; i < 60; i++) {
@@ -246,46 +195,19 @@
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            heart.style.opacity = Math.random();
-            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
 
-        let player;
-        const videoId = "X6NfWqPId1A"; // بهاء سلطان - معايا
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                height: '0', width: '0', videoId: videoId,
-                playerVars: { 
-                    'autoplay': 1, 
-                    'loop': 1, 
-                    'playlist': videoId,
-                    'controls': 0,
-                    'showinfo': 0
-                }
-            });
-        }
-
-        function playMusic() {
-            if (player && player.playVideo) { 
-                player.unMute();
-                player.setVolume(100);
-                player.playVideo(); 
-            }
-        }
-
         function generateStaticHearts() {
             const container = document.getElementById('staticHearts');
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 50; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('static-heart');
                 heart.innerHTML = '❤️';
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.opacity = (Math.random() * 0.4) + 0.3;
-                heart.style.transform = `rotate(${Math.random() * 360}deg) scale(${(Math.random() * 0.5) + 0.5})`;
+                heart.style.opacity = 0.3;
                 container.appendChild(heart);
             }
         }
@@ -298,19 +220,6 @@
             }, 1000);
         };
 
-        function checkPass() {
-            const pass = document.getElementById('passInput').value;
-            if(pass === '1532004') {
-                document.getElementById('step1').classList.remove('active');
-                document.getElementById('step2').classList.add('active');
-                playMusic();
-                setInterval(createFallingHeart, 300);
-                startCounters();
-            } else {
-                alert('الباسورد غلط! ركزي يا دودي 😉');
-            }
-        }
-
         function getCumulativeDiff(startDate) {
             const now = new Date();
             let years = now.getFullYear() - startDate.getFullYear();
@@ -319,11 +228,10 @@
             let hours = now.getHours() - startDate.getHours();
             let mins = now.getMinutes() - startDate.getMinutes();
             let secs = now.getSeconds() - startDate.getSeconds();
-
             if (secs < 0) { mins--; secs += 60; }
             if (mins < 0) { hours--; mins += 60; }
             if (hours < 0) { days--; hours += 24; }
-            if (days < 0) { months--; const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += lastMonth.getDate(); }
+            if (days < 0) { months--; days += 30; }
             if (months < 0) { years--; months += 12; }
             return { years, months, days, hours, mins, secs };
         }
