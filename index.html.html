@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dody 🫂❤️</title>
+    <style>
+        body { 
+            background: #2d0b1e; 
+            background-image: radial-gradient(circle at 20% 30%, rgba(255, 105, 180, 0.15) 0%, transparent 20%),
+                              radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.15) 0%, transparent 20%);
+            color: white; font-family: 'Arial', sans-serif; text-align: center; margin: 0; min-height: 100vh; overflow-x: hidden; line-height: 1.6; 
+            position: relative;
+        }
+
+        .star {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            z-index: 0;
+            pointer-events: none;
+        }
+        @keyframes twinkle {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.4); opacity: 0.8; }
+        }
+
+        .falling-heart {
+            position: fixed;
+            top: -10%;
+            color: #ff69b4;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 15;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        .static-hearts-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;
+        }
+        .static-heart {
+            position: absolute; color: rgba(255, 105, 180, 0.6); font-size: 20px;
+            filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.3));
+        }
+
+        #loader { position: fixed; width: 100%; height: 100%; background: #2d0b1e; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: 0.3s; }
+        .heart-loader { font-size: 60px; animation: pulse 1s infinite; color: #ff69b4; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+        .screen { display: none; width: 100%; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        .active { display: flex; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .card { background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(10px); border-radius: 25px; padding: 25px; width: 95%; max-width: 450px; border: 1px solid rgba(255,105,180,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.3); margin-bottom: 20px; z-index: 5; position: relative; }
+        
+        .extra-card {
+            background: rgba(255, 105, 180, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            width: 95%;
+            max-width: 450px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            margin-bottom: 15px;
+            text-align: right;
+            z-index: 5;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .extra-card b { color: #ff69b4; font-size: 16px; display: block; margin-bottom: 5px; }
+
+        .profile-img-container { margin-bottom: 15px; display: flex; justify-content: center; }
+        .lock-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #ff69b4; object-fit: cover; box-shadow: 0 0 20px rgba(255, 105, 180, 0.4); background: #444; }
+
+        .photo-gallery { display: flex; flex-direction: column; gap: 25px; margin-top: 20px; }
+        .photo-item { width: 100%; background: rgba(0,0,0,0.3); border-radius: 15px; padding: 10px; border: 1px solid rgba(255, 105, 180, 0.2); }
+        .photo-item img { width: 100%; height: auto; border-radius: 10px; display: block; background: #333; min-height: 200px; }
+        .caption { margin-top: 10px; font-size: 14px; color: #ffb6c1; font-weight: bold; }
+
+        .timer-title { color: #ffb6c1; font-weight: bold; margin-bottom: 10px; display: block; font-size: 14px;}
+        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+        .timer-box { background: rgba(255, 105, 180, 0.12); padding: 8px 2px; border-radius: 12px; border: 1px solid rgba(255,105,180,0.3); }
+        .timer-box span { display: block; font-size: 16px; color: #fff; font-weight: bold; }
+        .timer-label { font-size: 10px; color: #ffb6c1; }
+
+        .date-badge {
+            background: linear-gradient(45deg, rgba(255, 105, 180, 0.2), rgba(255, 20, 147, 0.3));
+            border: 1px dashed #ff69b4; padding: 10px; border-radius: 15px; margin-top: 15px;
+            font-weight: bold; color: #fff; display: inline-block; font-size: 15px;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(15px); border-radius: 25px; padding: 25px;
+            width: 95%; max-width: 450px; border: 1px solid rgba(255, 105, 180, 0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: right; margin-bottom: 20px; z-index: 5; position: relative;
+        }
+        .main-title { color: #ff69b4; font-weight: bold; font-size: 1.2rem; }
+        .love-message { font-size: 15px; color: #fff; }
+        .معاكسة { color: #ffb6c1; font-weight: bold; }
+
+        input { padding: 15px; border-radius: 12px; border: 1px solid #ff69b4; background: rgba(255,255,255,0.1); color: white; text-align: center; width: 80%; font-size: 18px; margin-bottom: 15px; outline: none; }
+        button { background: #ff69b4; color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; z-index: 10; position: relative; }
+
+        .footer-rights { margin-top: 20px; padding-bottom: 30px; font-size: 14px; color: #ffb6c1; }
+        .footer-rights b { color: #fff; border-bottom: 1px solid #ff69b4; }
+
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+        .modal-content { background: #2d0b1e; border-radius: 25px; padding: 30px; width: 85%; max-width: 400px; border: 2px solid #ff69b4; }
+
+        #youtube-player { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="starsContainer"></div>
+    <div id="staticHearts" class="static-hearts-container"></div>
+    <div id="youtube-player"></div>
+
+    <div id="loader">
+        <div class="heart-loader">❤️</div>
+        <h2 style="margin-top: 20px; color: #ff69b4;">ثواني يا دودي معلش ❤️😂✨</h2>
+    </div>
+
+    <div id="step1" class="screen active">
+        <div class="card">
+            <div class="profile-img-container">
+                <img src="https://i.postimg.cc/25XvXNjh/7.jpg" id="lockImg" class="lock-img" alt="Dody Profile"> 
+            </div>
+            <h2>جاهزة👀</h2>
+            <p>اكتبي تاريخ ميلادك يا دودي🌚</p>
+            <input type="text" id="passInput" placeholder="1532004">
+            <button onclick="checkPass()">افتحي يا دودي ❤️</button>
+        </div>
+    </div>
+
+    <div id="step2" class="screen" style="justify-content: flex-start; overflow-y: auto;">
+        <div class="card" style="background: rgba(255, 105, 180, 0.2); border: 2px solid #ff69b4;">
+            <h3 style="font-size: 2.2rem; margin: 0;">🫂❤️ Dody</h3>
+            <p>❤️🌍Best Friends Forever❤️🌍</p>
+        </div>
+
+        <div class="card">
+            <span class="timer-title">كل سنه وانتي طيبة يدودي ودي سنين عمرك الدائمة 🥹❤️</span>
+            <div class="timer-grid">
+                <div class="timer-box"><span id="ageYears">0</span><div class="timer-label">سنة</div></div>
+                <div class="timer-box"><span id="ageMonths">0</span><div class="timer-label">شهور</div></div>
+                <div class="timer-box"><span id="ageWeeks">0</span><div class="timer-label">أسابيع</div></div>
+                <div class="timer-box"><span id="ageDays">0</span><div class="timer-label">أيام</div></div>
+                <div class="timer-box"><span id="ageHours">0</span><div class="timer-label">ساعات</div></div>
+                <div class="timer-box"><span id="ageMinutes">0</span><div class="timer-label">دقائق</div></div>
+            </div>
+            <div class="timer-box" style="margin-top: 8px;"><span id="ageSeconds">0</span><div class="timer-label">ثواني</div></div>
+        </div>
+
+        <div class="card">
+            <span class="timer-title">العداد دا هيفضل يعد طول ماحنا مع بعض يدودي ❤️🫂</span>
+            <div class="timer-grid">
+                <div class="timer-box"><span id="meetYears">0</span><div class="timer-label">سنة</div></div>
+                <div class="timer-box"><span id="meetMonths">0</span><div class="timer-label">شهور</div></div>
+                <div class="timer-box"><span id="meetWeeks">0</span><div class="timer-label">أسابيع</div></div>
+                <div class="timer-box"><span id="meetDays">0</span><div class="timer-label">أيام</div></div>
+                <div class="timer-box"><span id="meetHours">0</span><div class="timer-label">ساعات</div></div>
+                <div class="timer-box"><span id="meetMins">0</span><div class="timer-label">دقائق</div></div>
+            </div>
+            <div class="timer-box" style="margin-top: 8px;"><span id="meetSecs">0</span><div class="timer-label">ثواني</div></div>
+            <div class="date-badge">📅 تاريخ مقابلتنا: 18-03-2021</div>
+        </div>
+
+        <div class="card">
+            <h3 style="color: #ffb6c1; margin-top: 0;">❤️🌍 Dody In Her Own World</h3>
+            <div class="photo-gallery">
+                <div class="photo-item"><img src="https://i.postimg.cc/Gm8XjKx7/Whats-App-Image-2026-03-11-at-5-48-21-AM.jpg" alt="1"><div class="caption">بطل يابا الحج 🫦</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/1zY6Y1Rv/9.jpg" alt="2"><div class="caption">براحة على الارض مش بتاعتنا يا بطل 😉❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/9fNTNHXp/8.jpg" alt="3"><div class="caption">كمان بوسه كتيير عليا والله 🫦😂❤️❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/43FtFR47/6.jpg" alt="4"><div class="caption">الاسود على الاسد بيمنع الحسد 😉❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/0QMSTXrd/12.jpg" alt="5"><div class="caption">نظرة عيونك فيها هدوء يخلي الواحد يسرح في جمالها 😍❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/25XvXNj5/2.jpg" alt="6"><div class="caption"></div>دوبني هالجماال😍❤️❤️</div>
+                <div class="photo-item"><img src="https://i.postimg.cc/QMn5nZNF/5.jpg" alt="7"><div class="caption">متهيألي مفيش رقة في الدنيا ممكن تتجمع في ملامح حد كدا ببساطه🥹❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/25XvXNjh/7.jpg" alt="8"><div class="caption">كل مابشوف صورتك وانتي بتضحكي بحس ان ملامحك دي حرام تزعل 🥰❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/YSygyB2X/10.jpg" alt="9"><div class="caption">هتروحي بينا فين تاااني اهدي علينا شوية😂❤️❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/vBgnJ2Dv/11.jpg" alt="10"><div class="caption">جمالك ورقتك ميتوصفوش بكلام عشان هتتظلمي يدودي والله🥰❤️❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/bvvkTwPr/1.jpg" alt="12"><div class="caption">اول ذكرى لينا سوا.. من 2022 واحنا لسه مع بعض في كل لحظة حلوة ووحشة ❤️🫂</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/VNNnRkwr/3.jpg" alt="13"><div class="caption">تاني مقابلة.. وقتها عرفت انك مش مجرد حد عرفته ❤️🥰</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/Pqb9mKdV/13.jpg" alt="14"><div class="caption">اهو انا مبحبش قد خدودك دي ربنا يديمها نعمة 😂❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/FKb8jGhn/14.jpg" alt="15"><div class="caption">ذكرياتنا عمرها ماهتتنسي 🥰❤️</div></div>
+                <div class="photo-item"><img src="https://i.postimg.cc/VNHMHPsS/4.jpg" alt="16"><div class="caption">وجودك معايا بيطمني اتمنى اشوفك تاني ف اقرب وقت 👀❤️</div></div>
+            </div>
+        </div>
+
+        <div class="glass-box">
+            <div style="text-align: center; margin-bottom: 10px;">
+                <span style="font-size: 20px;">💌</span>
+                <span class="main-title">الرسالة دي ليكي يا دودي..</span>
+            </div>
+            <p class="love-message">
+             "الكتكوتة كبرت سنة واحلوت وبقت مزة رسمي  كل سنة وانتي طيبة يا دودي ويا رب سنينك الجاية كلها ضحك وفرحة شبه ضحكتك القمر وعقبال مليون سنة وانتي منورة الدنيا بحلاوتك ورقتك يا احلى دودي.
+
+وطبعاً طبعاً أنا يوم ما عرفتك مكنتش خاااالص متوقع إننا هنكون قريبين كدا.. بس الأيام أثبتت لي إنك أجدع وأغلى صاحبة دخلت حياتي، وعشرتنا دي بجد من أجمل الحاجات اللي حصلتلي. فيه صحاب الرزق فيهم بيكون على هيئة راحة وطمأنينة.. ومن 2021 ولحد اللحظة دي، كنتِ دايماً الصاحبة اللي بتجمل الأيام بوجودها.. دمتِ أجدع وأحن صاحبة يا دودي وكل سنة وإحنا أصحاب ومكملين سوا. 🥹❤️"   
+                <span class="معاكسة">وبطلي تحلوي اكتر من كدا عشان اديكي شايفه الوضع مش مستحمل 😂❤️❤️</span>
+            </p>
+        </div>
+
+        <div class="extra-card">
+            <b></b>
+            كنتي 
+        </div>
+
+        <div class="extra-card">
+            <b></b>
+            ومازلتي
+        </div>
+
+        <div class="extra-card">
+            <b></b>
+            وهتفضلي
+        </div>
+
+        <div class="extra-card">
+            <b></b>
+            احن واجدع واحلى واجمد صاحبة في الدنيا ❤️🫂
+        </div>
+
+        <button onclick="showFinalModal()" style="width: 85%; margin-top: 10px;">دوسي هنا فيه حاجه كمان هقولهالك😂❤️</button>
+        <div class="footer-rights">Designed by <b>Engineer Omar Hamdy</b> </div>
+    </div>
+
+    <div id="finalModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #ff69b4;">دودي😍</h2>
+            <p>أنا فعلاً حظي حلو إنك في حياتي، وبتمنالك كل حاجة حلوة في الدنيا وان شاء الله توصلي للي بتتمنيه عشان انتي تستاهلي دا يقمر ❤️</p>
+            <button onclick="closeModal()" style="width: 100%;">خلصنا يا بطلي😂❤️</button>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        function generateStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 60; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                container.appendChild(star);
+            }
+        }
+        generateStars();
+
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        let player;
+        const videoId = "HVgy8Ge0GJQ";
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', width: '0', videoId: videoId,
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': videoId }
+            });
+        }
+
+        function playMusic() {
+            if (player && player.playVideo) { player.playVideo(); }
+        }
+
+        function generateStaticHearts() {
+            const container = document.getElementById('staticHearts');
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('static-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.opacity = (Math.random() * 0.4) + 0.3;
+                heart.style.transform = `rotate(${Math.random() * 360}deg) scale(${(Math.random() * 0.5) + 0.5})`;
+                container.appendChild(heart);
+            }
+        }
+        generateStaticHearts();
+
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
+            }, 1000);
+        };
+
+        function checkPass() {
+            const pass = document.getElementById('passInput').value;
+            if(pass === '1532004') {
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+                playMusic();
+                setInterval(createFallingHeart, 300);
+                startCounters();
+            } else {
+                alert('الباسورد غلط! ركزي يا دودي 😉');
+            }
+        }
+
+        // دالة موحدة لحساب الفرق الزمني التراكمي بدقة
+        function getCumulativeDiff(startDate) {
+            const now = new Date();
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+            let hours = now.getHours() - startDate.getHours();
+            let mins = now.getMinutes() - startDate.getMinutes();
+            let secs = now.getSeconds() - startDate.getSeconds();
+
+            if (secs < 0) { mins--; secs += 60; }
+            if (mins < 0) { hours--; mins += 60; }
+            if (hours < 0) { days--; hours += 24; }
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+            if (months < 0) { years--; months += 12; }
+
+            return { years, months, days, hours, mins, secs };
+        }
+
+        function startCounters() {
+            const birthDate = new Date("2004-03-15T00:00:00");
+            const meetDate = new Date("2021-03-18T00:00:00");
+            
+            const update = () => {
+                // تحديث عداد العمر
+                const age = getCumulativeDiff(birthDate);
+                document.getElementById('ageYears').innerText = age.years;
+                document.getElementById('ageMonths').innerText = age.months;
+                document.getElementById('ageWeeks').innerText = Math.floor(age.days / 7);
+                document.getElementById('ageDays').innerText = age.days % 7;
+                document.getElementById('ageHours').innerText = age.hours;
+                document.getElementById('ageMinutes').innerText = age.mins;
+                document.getElementById('ageSeconds').innerText = age.secs;
+
+                // تحديث عداد المقابلة بنفس المنطق
+                const meet = getCumulativeDiff(meetDate);
+                document.getElementById('meetYears').innerText = meet.years;
+                document.getElementById('meetMonths').innerText = meet.months;
+                document.getElementById('meetWeeks').innerText = Math.floor(meet.days / 7);
+                document.getElementById('meetDays').innerText = meet.days % 7;
+                document.getElementById('meetHours').innerText = meet.hours;
+                document.getElementById('meetMins').innerText = meet.mins;
+                document.getElementById('meetSecs').innerText = meet.secs;
+            };
+            setInterval(update, 1000);
+            update();
+        }
+
+        function showFinalModal() { document.getElementById('finalModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('finalModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
